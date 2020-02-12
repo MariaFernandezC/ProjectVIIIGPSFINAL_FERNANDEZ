@@ -1,4 +1,4 @@
-package com.projectviiigps;
+package com.projectviiigps.clases;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -7,16 +7,16 @@ import com.android.volley.toolbox.StringRequest;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ClaseRecuperarContrasena extends StringRequest {
+public class LoginRequest extends StringRequest {
 
-    private static final  String ruta = "http://appgpsmovil.000webhostapp.com/webservices/RecuperarContrasena.php";
+    private static final  String ruta = "http://appgpsmovil.000webhostapp.com/webservices/login.php";
     private Map<String, String> parametros;
 
-    public ClaseRecuperarContrasena(String correo, Response.Listener<String> listener){
+    public LoginRequest(String usuario, String clave, Response.Listener<String> listener){
         super(Request.Method.POST, ruta,listener,null);
         parametros =new HashMap<>();
-        parametros.put("correo",correo);
-
+        parametros.put("usuario",usuario+"");
+        parametros.put("clave",clave+"");
     }
 
     @Override
@@ -24,7 +24,5 @@ public class ClaseRecuperarContrasena extends StringRequest {
 
         return parametros;
     }
-
-
 
 }

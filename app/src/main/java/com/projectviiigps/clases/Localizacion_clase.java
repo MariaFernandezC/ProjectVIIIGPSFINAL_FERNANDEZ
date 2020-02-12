@@ -1,4 +1,4 @@
-package com.projectviiigps;
+package com.projectviiigps.clases;
 
 public class Localizacion_clase {
 

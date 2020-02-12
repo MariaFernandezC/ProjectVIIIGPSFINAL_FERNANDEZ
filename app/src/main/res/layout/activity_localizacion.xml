@@ -70,7 +70,7 @@
             android:src="@drawable/projectgps" />
 
 
-        <EditText
+        <Spinner
             android:id="@+id/edtnombrenino"
             android:layout_width="314dp"
             android:layout_height="34dp"

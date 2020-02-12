@@ -1,4 +1,4 @@
-package com.projectviiigps;
+package com.projectviiigps.clases;
 
 import androidx.annotation.Nullable;
 

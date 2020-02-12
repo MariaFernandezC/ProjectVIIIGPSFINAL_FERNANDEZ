@@ -4,7 +4,7 @@
         <item
             android:id="@+id/menu_seccion_1"
             android:icon="@drawable/ic_home"
-            android:title="Principal" />
+            android:title="Noticias" />
         <item
             android:id="@+id/menu_seccion_2"
             android:icon="@drawable/ic_registro"
@@ -33,9 +33,13 @@
                 android:icon="@drawable/option"
                 android:title="Cerrar sesión"/>
             <item
+                android:id="@+id/btnayuda"
+                android:icon="@drawable/option"
+                android:title="Ayuda GPS KIDS"/>
+            <item
                 android:id="@+id/btnacercade"
                 android:icon="@drawable/option"
-                android:title="Acerca de GPS UTEQ"/>
+                android:title="Acerca de GPS KIDS"/>
         </menu>
     </item>
 </menu>

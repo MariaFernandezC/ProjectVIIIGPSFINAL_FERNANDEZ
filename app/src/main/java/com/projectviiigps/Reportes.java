@@ -77,6 +77,7 @@ public class Reportes extends FragmentActivity implements OnMapReadyCallback, Vi
     EditText etFecha;
     ImageButton ibObtenerFecha;
     DatePicker picker;
+    Button lando;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,7 +91,18 @@ public class Reportes extends FragmentActivity implements OnMapReadyCallback, Vi
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
+        
         mapFragment.getMapAsync(this);
+
+        lando = (Button) findViewById(R.id.btnSatelite);
+        lando.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                buscarnino("https://appgpsmovil.000webhostapp.com/webservices/consultarlocalizacion.php?nombrenino=" + etFecha.getText() + "");
+
+            }
+        });
+
 
 
     }
@@ -133,9 +145,8 @@ public class Reportes extends FragmentActivity implements OnMapReadyCallback, Vi
             mMap.setMyLocationEnabled(true);
         }
     }
-    public void EnviarRecibirDatos(View view) {
-        // String consulta = "https://localizadorgps.000webhostapp.com/consultarReserva.php";
-        String consulta = "https://appgpsmovil.000webhostapp.com/webservices/consultarlocalizacion.php?nombrenino=" + etFecha.getText() + "";
+    private void buscarnino(String consulta) {    // String consulta = "https://localizadorgps.000webhostapp.com/consultarReserva.php";
+        // String consulta = "https://appgpsmovil.000webhostapp.com/webservices/consultarlocalizacion.php?nombrenino=" + etFecha.getText() + "";
 
         RequestQueue queue = Volley.newRequestQueue(this);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, consulta, new Response.Listener<String>() {
@@ -169,7 +180,7 @@ public class Reportes extends FragmentActivity implements OnMapReadyCallback, Vi
     public void llamada(View view) {
 
         try {
-            EnviarRecibirDatos(view);
+            // EnviarRecibirDatos(view);
             btnSatelite(view);
             if (lis == null || lis.size() == 0) {
                 Toast.makeText(getApplicationContext(), "Intente nuevamente", Toast.LENGTH_SHORT).show();
@@ -191,7 +202,7 @@ public class Reportes extends FragmentActivity implements OnMapReadyCallback, Vi
     ArrayList<Double> lis2 = new ArrayList<>();
     ArrayList<String> lis3 = new ArrayList<>();
     LatLng punto = null;
-
+    View vies;
     public void CargarListView(JSONArray ja) {
 
         int z = 0;
@@ -216,7 +227,7 @@ public class Reportes extends FragmentActivity implements OnMapReadyCallback, Vi
 
         }
 
-
+        btnSatelite(vies);
     }
 
 
@@ -329,7 +340,7 @@ public class Reportes extends FragmentActivity implements OnMapReadyCallback, Vi
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
     }
-
+    int n=0;
     public void btnSatelite(View view) {
 
         mMap.clear();
@@ -344,6 +355,17 @@ public class Reportes extends FragmentActivity implements OnMapReadyCallback, Vi
 
 
         //Definimos el grosor de las Polilíneas
+        n=n+1;
+        if(n==2)
+        {
+            lista.clear();
+            lista1.clear();
+            lista2.clear();
+            lis.clear();
+            lis2.clear();
+            lis3.clear();
+            n=0;
+        }
 
 
     }
@@ -365,5 +387,4 @@ public class Reportes extends FragmentActivity implements OnMapReadyCallback, Vi
 //mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
 // CameraUpdate camUpd1 = (CameraUpdateFactory.newLatLngZoom(center, 13));
 //mMap.moveCamera(camUpd1);
-
 

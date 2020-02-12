@@ -8,34 +8,32 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
 import com.projectviiigps.Others.Preferences;
+import com.projectviiigps.clases.RegistroHijoRequest;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import static java.security.AccessController.getContext;
-
 public class RegistroHijo extends AppCompatActivity {
 
-    private EditText idpadre1;
+    EditText nombre, apellido,edad,direccion,tiposangreh,enfermedadh,alergiah;
     private String id_padre;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro_hijo);
-        final EditText nombre              = findViewById(R.id.RegistroNombresH);
-        final EditText apellido           = findViewById(R.id.RegistroApellidosH);
-        final EditText edad               = findViewById(R.id.RegistroEdadH);
-        final EditText direccion          = findViewById(R.id.RegistroDireccionH);
-        final EditText tiposangreh           = findViewById(R.id.RegistroTipoSangreH);
-        final EditText enfermedadh           = findViewById(R.id.RegistroEnfermedadH);
-        final EditText alergiah             = findViewById(R.id.RegistroAlergiaH);
+          nombre              = findViewById(R.id.RegistroNombresH);
+          apellido           = findViewById(R.id.RegistroApellidosH);
+          edad               = findViewById(R.id.RegistroEdadH);
+          direccion          = findViewById(R.id.RegistroDireccionH);
+          tiposangreh           = findViewById(R.id.RegistroTipoSangreH);
+          enfermedadh           = findViewById(R.id.RegistroEnfermedadH);
+          alergiah             = findViewById(R.id.RegistroAlergiaH);
         Button btnRegistro                  = findViewById(R.id.btnRegistroH);
 
         final EditText codigo              = findViewById(R.id.RegistroCodigop);
@@ -63,8 +61,6 @@ public class RegistroHijo extends AppCompatActivity {
                 String tiposangre    = tiposangreh.getText().toString();
                 String enfermedad    = enfermedadh.getText().toString();
                 String alergia    = alergiah.getText().toString();
-
-
 
                 Response.Listener <String> respuesta=new Response.Listener<String>() {
                     @Override

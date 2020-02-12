@@ -129,14 +129,18 @@ public class Bienvenido extends AppCompatActivity implements NavigationView.OnNa
         recyclerView = findViewById(R.id.recview);
         recyclerhijos = findViewById(R.id.recview2);
         Intent i = this.getIntent();
-        String nombre = Preferences.obtenerPreferenceStringNombre(this, Preferences.PREFERENCE_USUARIO_LOGIN_NOMBRE);
+        String id = Preferences.obtenerPreferenceStringId(this, Preferences.PREFERENCE_USUARIO_LOGIN_ID);
+        String usuario = Preferences.obtenerPreferenceStringUsuario(this, Preferences.PREFERENCE_USUARIO_LOGIN_USUARIO);
         //llenar
-        String direccion = Preferences.obtenerPreferenceStringDireccion(this, Preferences.PREFERENCE_USUARIO_LOGIN_DIRECCION);
+        String clave = Preferences.obtenerPreferenceStringContrasenia(this, Preferences.PREFERENCE_USUARIO_LOGIN_CONTRASENIA);
         int telefono = Integer.valueOf(Preferences.obtenerPreferenceStringTelefono(this, Preferences.PREFERENCE_USUARIO_LOGIN_TELEFONO));
         String correo = Preferences.obtenerPreferenceStringCorreo(this, Preferences.PREFERENCE_USUARIO_LOGIN_CORREO);
         Map<String, String> datos = new HashMap<String, String>();
-
-        WebService ws = new WebService("https://appgpsmovil.000webhostapp.com/webservices/hijos_padre.php?id_usuario=2&user=%22MariaFernandezC%22&pass=251215",datos,this,this);
+        datos.put("user",usuario.trim());
+        datos.put("pass",clave.trim());
+        datos.put("id_usuario",id.trim());
+        WebService ws = new WebService("https://appgpsmovil.000webhostapp.com/webservices/hijos_padre.php",datos,this,this);
+        //WebService ws = new WebService("https://appgpsmovil.000webhostapp.com/webservices/hijos_padre.php?id_usuario="+id+"&&user='"+usuario+"'&&pass="+clave,datos,this,this);
         ws.execute("");
 
     }
@@ -175,8 +179,12 @@ public class Bienvenido extends AppCompatActivity implements NavigationView.OnNa
             startActivity(i);
         }
         else if (id == R.id.btnactualizar) {
-        Intent i = new Intent(Bienvenido.this,ActualizarDatos.class);
-        startActivity(i);
+            Intent i = new Intent(Bienvenido.this,ActualizarGeneral.class);
+            startActivity(i);
+        }
+        else if (id == R.id.btnayuda) {
+            Intent i = new Intent(Bienvenido.this,VisorPdf.class);
+            startActivity(i);
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

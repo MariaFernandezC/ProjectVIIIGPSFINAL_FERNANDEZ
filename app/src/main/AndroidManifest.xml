@@ -19,7 +19,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ActualizarDatos"></activity>
+        <activity android:name=".ActualizarDatoHijo"></activity>
+        <activity android:name=".ActualizarGeneral" />
+        <activity android:name=".VisorPdf" />
+        <activity android:name=".ActualizarDatos" />
         <activity android:name=".RecuperarContrasena" />
 
         <meta-data

@@ -116,7 +116,11 @@
             android:paddingBottom="10dp"
             android:textColor="#1e8449"
             android:textColorHint="#1e8449" />
-
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
         <EditText
             android:id="@+id/RegistroTelefono"
             android:layout_width="match_parent"
@@ -194,6 +198,7 @@
             android:layout_marginRight="20dp"
             android:background="#1e8449"
             android:elevation="5dp"
+            android:onClick="Enviar"
             android:text="Registrarse"
             android:textColor="#FFFFFF"
             android:textSize="16sp" />
@@ -208,6 +213,8 @@
             android:labelFor="@+id/pregunta"
             android:text="¿Ya tienes cuenta? Iniciar Sesión"
             android:textColor="#1e8449" />
+
+
 
     </LinearLayout>
 

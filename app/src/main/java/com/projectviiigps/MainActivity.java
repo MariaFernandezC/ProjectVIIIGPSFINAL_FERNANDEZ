@@ -5,7 +5,6 @@ import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -17,6 +16,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
 import com.projectviiigps.Others.Preferences;
+import com.projectviiigps.clases.LoginRequest;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -112,6 +112,9 @@ public class MainActivity extends AppCompatActivity {
                                 Preferences.savePreferenceStringContrasenia(MainActivity.this,
                                         jsonRespuesta.getString("clave"),
                                         Preferences.PREFERENCE_USUARIO_LOGIN_CONTRASENIA);
+                                Preferences.savePreferenceStringUsuario(MainActivity.this,
+                                        jsonRespuesta.getString("usuario"),
+                                        Preferences.PREFERENCE_USUARIO_LOGIN_USUARIO);
 
 
 
