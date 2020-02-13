@@ -112,7 +112,11 @@ public class Bienvenido extends AppCompatActivity implements NavigationView.OnNa
                                 Preferences.savePreferenceStringNombre(Bienvenido.this,"",
                                         Preferences.PREFERENCE_USUARIO_LOGIN_NOMBRE);
                                 Preferences.savePreferenceStringContrasenia(Bienvenido.this,"",
-                                        Preferences.PREFERENCE_USUARIO_LOGIN_NOMBRE);
+                                        Preferences.PREFERENCE_USUARIO_LOGIN_CONTRASENIA);
+                                Preferences.savePreferenceStringUsuario(Bienvenido.this,"",
+                                        Preferences.PREFERENCE_USUARIO_LOGIN_USUARIO);
+                                Preferences.savePreferenceStringApellido(Bienvenido.this,"",
+                                        Preferences.PREFERENCE_USUARIO_LOGIN_APELLIDO);
                                 Intent i = new Intent(Bienvenido.this,MainActivity.class);
                                 startActivity(i);
                                 finish();
@@ -228,7 +232,7 @@ public class Bienvenido extends AppCompatActivity implements NavigationView.OnNa
             JSONObject objIssue = jsonArrayIssuehijo.getJSONObject(i);
             dataHijos dt;
 
-            dt= new dataHijos(objIssue.getString("nombreh")+ " "+ objIssue.getString("apellidoh"),objIssue.getString("edadh"),objIssue.getString("direccionh"),objIssue.getString("tiposangre"),objIssue.getString("enfermedad"),objIssue.getString("alergia"));
+            dt= new dataHijos(objIssue.getString("nombreh")+ " "+ objIssue.getString("apellidoh"),objIssue.getString("nombreh"),objIssue.getString("edadh"),objIssue.getString("direccionh"),objIssue.getString("tiposangre"),objIssue.getString("enfermedad"),objIssue.getString("alergia"));
             dataHijos.add(dt);
         }
         recAdapterHijos= new RecAdapterHijos(dataHijos,this);
@@ -241,7 +245,7 @@ public class Bienvenido extends AppCompatActivity implements NavigationView.OnNa
     @Override
     public void onClick(View view, int position) {
         Intent intent = new Intent(Bienvenido.this, localizacion.class);
-        intent.putExtra("nombre",dataHijos.get(position).getNombre());
+        intent.putExtra("nombre",dataHijos.get(position).getOnlynombre());
         intent.putExtra("key","true");
         startActivity(intent);
     }

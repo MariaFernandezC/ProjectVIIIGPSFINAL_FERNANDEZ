@@ -57,132 +57,139 @@ public class Registro extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                String nombre       = nombret.getText().toString();
-                String apellido       = apellidost.getText().toString();
-                int cedula          = Integer.parseInt( cedulat.getText().toString());
-                int    edad         =  Integer.parseInt( edadt.getText().toString());
-                String direccion    = direcciont.getText().toString();;
-                int telefono        = Integer.parseInt(telefonot.getText().toString());
-                String correo       = correoelectronicot.getText().toString();
-                String usuario      = usuariot.getText().toString();
-                String clave        = clavet.getText().toString();
+
+                try{
+                    String nombre       = nombret.getText().toString();
+                    String apellido       = apellidost.getText().toString();
+                    int cedula          = Integer.parseInt( cedulat.getText().toString());
+                    int    edad         =  Integer.parseInt( edadt.getText().toString());
+                    String direccion    = direcciont.getText().toString();;
+                    int telefono        = Integer.parseInt(telefonot.getText().toString());
+                    String correo       = correoelectronicot.getText().toString();
+                    String usuario      = usuariot.getText().toString();
+                    String clave        = clavet.getText().toString();
 
 
 
-                if (nombret.getText().toString().isEmpty()){
-                    AlertDialog.Builder alerta =new AlertDialog.Builder( Registro.this);
-                    alerta.setMessage("Se encuentra vacio el campo Nombre")
-                            .setNegativeButton( "Reintertar", null)
-                            .create()
-                            .show();
-                }
-                else {
-                    if (apellidost.getText().toString().isEmpty()){
+                    if (nombret.getText().toString().isEmpty()){
                         AlertDialog.Builder alerta =new AlertDialog.Builder( Registro.this);
-                        alerta.setMessage("Se encuentra vacio el campo Apellido")
+                        alerta.setMessage("Se encuentra vacio el campo Nombre")
                                 .setNegativeButton( "Reintertar", null)
                                 .create()
                                 .show();
                     }
-                    else{
-                        if (cedulat.getText().toString().isEmpty()){
+                    else {
+                        if (apellidost.getText().toString().isEmpty()){
                             AlertDialog.Builder alerta =new AlertDialog.Builder( Registro.this);
-                            alerta.setMessage("Se encuentra vacio el campo Cedula")
+                            alerta.setMessage("Se encuentra vacio el campo Apellido")
                                     .setNegativeButton( "Reintertar", null)
                                     .create()
                                     .show();
-                        }else {
-                            if (edadt.getText().toString().isEmpty()){
+                        }
+                        else{
+                            if (cedulat.getText().toString().isEmpty()){
                                 AlertDialog.Builder alerta =new AlertDialog.Builder( Registro.this);
-                                alerta.setMessage("Se encuentra vacio el campo Edad")
+                                alerta.setMessage("Se encuentra vacio el campo Cedula")
                                         .setNegativeButton( "Reintertar", null)
                                         .create()
                                         .show();
-                            }else{
-                                if (direcciont.getText().toString().isEmpty()){
+                            }else {
+                                if (edadt.getText().toString().isEmpty()){
                                     AlertDialog.Builder alerta =new AlertDialog.Builder( Registro.this);
-                                    alerta.setMessage("Se encuentra vacio el campo Direccion")
+                                    alerta.setMessage("Se encuentra vacio el campo Edad")
                                             .setNegativeButton( "Reintertar", null)
                                             .create()
                                             .show();
                                 }else{
-                                    if (telefonot.getText().toString().isEmpty()){
+                                    if (direcciont.getText().toString().isEmpty()){
                                         AlertDialog.Builder alerta =new AlertDialog.Builder( Registro.this);
-                                        alerta.setMessage("Se encuentra vacio el campo Telefono")
+                                        alerta.setMessage("Se encuentra vacio el campo Direccion")
                                                 .setNegativeButton( "Reintertar", null)
                                                 .create()
                                                 .show();
                                     }else{
-                                        if (correoelectronicot.getText().toString().isEmpty()){
+                                        if (telefonot.getText().toString().isEmpty()){
                                             AlertDialog.Builder alerta =new AlertDialog.Builder( Registro.this);
-                                            alerta.setMessage("Se encuentra vacio el campo Correo electronico")
+                                            alerta.setMessage("Se encuentra vacio el campo Telefono")
                                                     .setNegativeButton( "Reintertar", null)
                                                     .create()
                                                     .show();
                                         }else{
-                                            if (usuariot.getText().toString().isEmpty()){
+                                            if (correoelectronicot.getText().toString().isEmpty()){
                                                 AlertDialog.Builder alerta =new AlertDialog.Builder( Registro.this);
-                                                alerta.setMessage("Se encuentra vacio el campo Usuario")
+                                                alerta.setMessage("Se encuentra vacio el campo Correo electronico")
                                                         .setNegativeButton( "Reintertar", null)
                                                         .create()
                                                         .show();
-                                            }else {
-                                                if (clavet.getText().toString().isEmpty()){
+                                            }else{
+                                                if (usuariot.getText().toString().isEmpty()){
                                                     AlertDialog.Builder alerta =new AlertDialog.Builder( Registro.this);
-                                                    alerta.setMessage("Se encuentra vacio el campo Clave")
+                                                    alerta.setMessage("Se encuentra vacio el campo Usuario")
                                                             .setNegativeButton( "Reintertar", null)
                                                             .create()
                                                             .show();
-                                                }
-                                             }
+                                                }else {
+                                                    if (clavet.getText().toString().isEmpty()){
+                                                        AlertDialog.Builder alerta =new AlertDialog.Builder( Registro.this);
+                                                        alerta.setMessage("Se encuentra vacio el campo Clave")
+                                                                .setNegativeButton( "Reintertar", null)
+                                                                .create()
+                                                                .show();
+                                                    }
+                                                 }
+                                              }
+                                            }
                                           }
                                         }
-                                      }
-                                    }
+                                     }
+                                   }
                                  }
-                               }
-                             }
-                if (!nombret.getText().toString().isEmpty()&&!apellidost.getText().toString().isEmpty()&&!cedulat.getText().toString().isEmpty()&&
-                        !edadt.getText().toString().isEmpty()&&!direcciont.getText().toString().isEmpty()&&!telefonot.getText().toString().isEmpty()&&
-                        !correoelectronicot.getText().toString().isEmpty()&&!usuariot.getText().toString().isEmpty()&&!clavet.getText().toString().isEmpty())
-                {
-                Response.Listener <String> respuesta= new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
+                    if (!nombret.getText().toString().isEmpty()&&!apellidost.getText().toString().isEmpty()&&!cedulat.getText().toString().isEmpty()&&
+                            !edadt.getText().toString().isEmpty()&&!direcciont.getText().toString().isEmpty()&&!telefonot.getText().toString().isEmpty()&&
+                            !correoelectronicot.getText().toString().isEmpty()&&!usuariot.getText().toString().isEmpty()&&!clavet.getText().toString().isEmpty())
+                    {
+                    Response.Listener <String> respuesta= new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            try {
 
-                            JSONObject jsonRespuesta =new JSONObject(response);
-                            boolean ok = jsonRespuesta.getBoolean("success");
+                                JSONObject jsonRespuesta =new JSONObject(response);
+                                boolean ok = jsonRespuesta.getBoolean("success");
 
 
-                            if ( ok){
+                                if ( ok){
 
-                                final ProgressDialog progressDialog = new ProgressDialog(Registro.this);
-                                progressDialog.setIcon(R.mipmap.ic_launcher);
-                                progressDialog.setMessage("Cargando...");
-                                progressDialog.show();
-                                Intent i = new Intent(Registro.this, MainActivity.class);
-                                Registro.this.startActivity(i);
-                                Registro.this.finish();
-                                progressDialog.dismiss();
+                                    final ProgressDialog progressDialog = new ProgressDialog(Registro.this);
+                                    progressDialog.setIcon(R.mipmap.ic_launcher);
+                                    progressDialog.setMessage("Cargando...");
+                                    progressDialog.show();
+                                    Intent i = new Intent(Registro.this, MainActivity.class);
+                                    Registro.this.startActivity(i);
+                                    Registro.this.finish();
+                                    progressDialog.dismiss();
 
-                            }else {
-                                AlertDialog.Builder alerta =new AlertDialog.Builder( Registro.this);
-                                alerta.setMessage("Fallo en el Registro")
-                                        .setNegativeButton( "Reintertar", null)
-                                        .create()
-                                        .show();
+                                }else {
+                                    AlertDialog.Builder alerta =new AlertDialog.Builder( Registro.this);
+                                    alerta.setMessage("Fallo en el Registro")
+                                            .setNegativeButton( "Reintertar", null)
+                                            .create()
+                                            .show();
+                                }
+                            }catch (JSONException e){
+                                e.getMessage();
                             }
-                        }catch (JSONException e){
-                            e.getMessage();
                         }
-                    }
-                };
-                RegistroRequest r = new RegistroRequest(nombre,apellido,cedula,edad,direccion,telefono,correo,usuario,clave, respuesta);
+                    };
+                    RegistroRequest r = new RegistroRequest(nombre,apellido,cedula,edad,direccion,telefono,correo,usuario,clave, respuesta);
 
-                RequestQueue cola = Volley.newRequestQueue( Registro.this);
-                cola.add(r);
+                    RequestQueue cola = Volley.newRequestQueue( Registro.this);
+                    cola.add(r);
+                }
             }
+                catch (Exception ex)
+                {
+                    Toast.makeText(view.getContext(),"Error en el ingreso de datos",Toast.LENGTH_LONG).show();
+                }
             }
         });
 

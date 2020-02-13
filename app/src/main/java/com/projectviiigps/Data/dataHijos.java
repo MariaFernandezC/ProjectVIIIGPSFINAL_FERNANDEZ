@@ -1,16 +1,19 @@
 package com.projectviiigps.Data;
 
 public class dataHijos {
-    private  String nombre, edad, direccion,tiposangre,enfermedad,alergia;
+    private  String nombrecompleto,onlynombre, edad, direccion,tiposangre,enfermedad,alergia;
 
-    public dataHijos(String nombre, String edad, String direccion, String tiposangre, String enfermedad, String alergia) {
-        this.nombre = nombre;
+    public dataHijos(String nombrecompleto,String onlynombre, String edad, String direccion, String tiposangre, String enfermedad, String alergia) {
+        this.nombrecompleto = nombrecompleto;
         this.edad = edad;
         this.direccion = direccion;
         this.tiposangre = tiposangre;
         this.enfermedad = enfermedad;
         this.alergia = alergia;
+        this.onlynombre = onlynombre;
     }
+
+
 
     public String getEdad() {
         return edad;
@@ -52,11 +55,20 @@ public class dataHijos {
         this.alergia = alergia;
     }
 
-    public String getNombre() {
-        return nombre;
+
+    public String getNombrecompleto() {
+        return nombrecompleto;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombrecompleto(String nombrecompleto) {
+        this.nombrecompleto = nombrecompleto;
+    }
+
+    public String getOnlynombre() {
+        return onlynombre;
+    }
+
+    public void setOnlynombre(String onlynombre) {
+        this.onlynombre = onlynombre;
     }
 }

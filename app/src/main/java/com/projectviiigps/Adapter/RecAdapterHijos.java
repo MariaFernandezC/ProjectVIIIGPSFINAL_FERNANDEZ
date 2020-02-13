@@ -70,7 +70,7 @@ public class RecAdapterHijos extends RecyclerView.Adapter<RecAdapterHijos.RecVie
         }
 
         private void bind(dataHijos dt) {
-            nombre.setText(dt.getNombre());
+            nombre.setText(dt.getNombrecompleto());
             edad.setText("Edad: "+dt.getEdad());
             direccion.setText("Direccion: "+dt.getDireccion());
             tiposangre.setText("Tipo de sangre: "+dt.getTiposangre());

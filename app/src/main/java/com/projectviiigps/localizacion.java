@@ -35,6 +35,7 @@ import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.loopj.android.http.*;
@@ -64,7 +65,8 @@ public class localizacion extends AppCompatActivity implements OnMapReadyCallbac
     private String array_spinner[];
     private static String var = "";
     private static int band = 0;
-
+    private MarkerOptions markerOptions;
+    private Marker marker;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
 
     @Override
@@ -125,8 +127,17 @@ public class localizacion extends AppCompatActivity implements OnMapReadyCallbac
                 if(band==0){
                     String nom = adapter.getItemAtPosition(i).toString();
                     //spinerHijos.notifyAll();
-                    buscarnino("http://appgpsmovil.000webhostapp.com/webservices/datos.php?nombrenino="
-                            + nom);
+                    try{
+                        mMap.clear();
+                        buscarnino("http://appgpsmovil.000webhostapp.com/webservices/datos.php?nombrenino="
+                                + nom);
+                    }
+                    catch (Exception ex){
+                        buscarnino("http://appgpsmovil.000webhostapp.com/webservices/datos.php?nombrenino="
+                                + nom);
+                    }
+
+
                 }
                 else {
                 }
@@ -154,8 +165,10 @@ public class localizacion extends AppCompatActivity implements OnMapReadyCallbac
                         Double longitud = Double.parseDouble(edtlongitud.getText().toString());
                         LatLng latLng = new LatLng(latitud,longitud);
                         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-                        mMap.addMarker(new MarkerOptions().position(latLng).title("Punto. Lat: "+ latitud +", Lon:" + longitud));
+                        markerOptions = new MarkerOptions().position(latLng).title("Punto. Lat: "+ latitud +", Lon:" + longitud);
+                        marker =  mMap.addMarker(markerOptions);
                         mMap.animateCamera(CameraUpdateFactory.zoomTo(10));
+                        Toast.makeText(localizacion.this, "Niño encontrado", Toast.LENGTH_SHORT).show();
                     } catch (JSONException e) {
                         Toast.makeText(localizacion.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
@@ -164,7 +177,7 @@ public class localizacion extends AppCompatActivity implements OnMapReadyCallbac
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(localizacion.this, "Error de conexion", Toast.LENGTH_SHORT).show();
+                Toast.makeText(localizacion.this, "El niño de no tiene coordenadas registradas", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -240,7 +253,7 @@ public class localizacion extends AppCompatActivity implements OnMapReadyCallbac
             try {
                 int spinnerPosition = adapter.getPosition(var);
                 spinerHijos.setSelection(spinnerPosition);
-                String userseleccionado = spinerHijos.getSelectedItem().toString();
+                String userseleccionado = getIntent().getExtras().getString("nombre");
                 //spinerHijos.notifyAll();
                 buscarnino("http://appgpsmovil.000webhostapp.com/webservices/datos.php?nombrenino="
                         + userseleccionado);
@@ -250,7 +263,6 @@ public class localizacion extends AppCompatActivity implements OnMapReadyCallbac
                 Toast.makeText(this,"Error: "+ex.getMessage(),Toast.LENGTH_LONG).show();
             }
         }
-
     }
 
 

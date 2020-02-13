@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -78,85 +79,78 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 final String usuario = usuarioT.getText().toString();
                 final String clave = claveT.getText().toString();
+                if(!usuario.equals("")&& !clave.equals(""))
+                {
+                    Response.Listener<String> respuesta = new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            try {
+                                JSONObject jsonRespuesta = new JSONObject(response);
+                                boolean ok =jsonRespuesta.getBoolean("success");
+                                if ( ok==true ){
+                                    //int idpadre1 = jsonRespuesta.getInt("idpadre");//esto
+                                    String nombre = jsonRespuesta.getString("nombre");
+                                    String apellido = jsonRespuesta.getString("apellido");
+                                    String direccion = jsonRespuesta.getString("direccion");
+                                    int telefono = jsonRespuesta.getInt("telefono");
+                                    String correo = jsonRespuesta.getString("correo");
+                                    Preferences.savePreferenceStringId(MainActivity.this,jsonRespuesta.getString("idpadre"),
+                                            Preferences.PREFERENCE_USUARIO_LOGIN_ID);
+                                    Preferences.savePreferenceStringNombre(MainActivity.this,
+                                            (jsonRespuesta.getString("nombre")+" "+ jsonRespuesta.getString("apellido")),
+                                            Preferences.PREFERENCE_USUARIO_LOGIN_NOMBRE);
+                                    Preferences.savePreferenceStringTelefono(MainActivity.this,jsonRespuesta.getString("telefono"),
+                                            Preferences.PREFERENCE_USUARIO_LOGIN_TELEFONO);
+                                    Preferences.savePreferenceStringCorreo(MainActivity.this,jsonRespuesta.getString("correo"),
+                                            Preferences.PREFERENCE_USUARIO_LOGIN_CORREO);
+                                    Preferences.savePreferenceStringDireccion(MainActivity.this,jsonRespuesta.getString("direccion"),
+                                            Preferences.PREFERENCE_USUARIO_LOGIN_DIRECCION);
+                                    Preferences.savePreferenceStringContrasenia(MainActivity.this,
+                                            jsonRespuesta.getString("clave"),
+                                            Preferences.PREFERENCE_USUARIO_LOGIN_CONTRASENIA);
+                                    Preferences.savePreferenceStringUsuario(MainActivity.this,
+                                            jsonRespuesta.getString("usuario"),
+                                            Preferences.PREFERENCE_USUARIO_LOGIN_USUARIO);
+                                    //int edad =jsonRespuesta.getInt("edad");
+                                    Intent bienvenido = new Intent( MainActivity.this, Bienvenido.class);
+                                    bienvenido.putExtra("nombre",nombre);
+                                    bienvenido.putExtra("apellido",apellido);
+                                    bienvenido.putExtra("direccion",direccion);
+                                    bienvenido.putExtra("telefono",telefono);
+                                    bienvenido.putExtra("correo",correo);
+                                  //  bienvenido.putExtra("idpadre",idpadre1);
+                                    startActivity(bienvenido);
+                                    //MainActivity.this.finish();
+                                }
+                                else {
+                                    AlertDialog.Builder alerta =new AlertDialog.Builder( MainActivity.this);
+                                    alerta.setMessage("Fallo en el login")
+                                            .setNegativeButton( "Reintentar", null)
+                                            .create()
+                                            .show();
+                                }
 
-                Response.Listener<String> respuesta = new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-
-                        try {
-                            JSONObject jsonRespuesta = new JSONObject(response);
-                            boolean ok =jsonRespuesta.getBoolean("success");
-
-
-                            if ( ok==true ){
-
-                                //int idpadre1 = jsonRespuesta.getInt("idpadre");//esto
-                                String nombre = jsonRespuesta.getString("nombre");
-                                String apellido = jsonRespuesta.getString("apellido");
-                                String direccion = jsonRespuesta.getString("direccion");
-                                int telefono = jsonRespuesta.getInt("telefono");
-                                String correo = jsonRespuesta.getString("correo");
-                              ;
-
-                                Preferences.savePreferenceStringId(MainActivity.this,jsonRespuesta.getString("idpadre"),
-                                        Preferences.PREFERENCE_USUARIO_LOGIN_ID);
-                                Preferences.savePreferenceStringNombre(MainActivity.this,
-                                        (jsonRespuesta.getString("nombre")+" "+ jsonRespuesta.getString("apellido")),
-                                        Preferences.PREFERENCE_USUARIO_LOGIN_NOMBRE);
-                                Preferences.savePreferenceStringTelefono(MainActivity.this,jsonRespuesta.getString("telefono"),
-                                        Preferences.PREFERENCE_USUARIO_LOGIN_TELEFONO);
-                                Preferences.savePreferenceStringCorreo(MainActivity.this,jsonRespuesta.getString("correo"),
-                                        Preferences.PREFERENCE_USUARIO_LOGIN_CORREO);
-                                Preferences.savePreferenceStringDireccion(MainActivity.this,jsonRespuesta.getString("direccion"),
-                                        Preferences.PREFERENCE_USUARIO_LOGIN_DIRECCION);
-                                Preferences.savePreferenceStringContrasenia(MainActivity.this,
-                                        jsonRespuesta.getString("clave"),
-                                        Preferences.PREFERENCE_USUARIO_LOGIN_CONTRASENIA);
-                                Preferences.savePreferenceStringUsuario(MainActivity.this,
-                                        jsonRespuesta.getString("usuario"),
-                                        Preferences.PREFERENCE_USUARIO_LOGIN_USUARIO);
-
-
-
-
-                                //int edad =jsonRespuesta.getInt("edad");
-                                Intent bienvenido = new Intent( MainActivity.this, Bienvenido.class);
-                                bienvenido.putExtra("nombre",nombre);
-                                bienvenido.putExtra("apellido",apellido);
-                                bienvenido.putExtra("direccion",direccion);
-                                bienvenido.putExtra("telefono",telefono);
-                                bienvenido.putExtra("correo",correo);
-                              //  bienvenido.putExtra("idpadre",idpadre1);
-
-                                startActivity(bienvenido);
-                                //MainActivity.this.finish();
-
-                            }
-                            else {
+                            } catch (JSONException e){
+                                e.getMessage();
                                 AlertDialog.Builder alerta =new AlertDialog.Builder( MainActivity.this);
-                                alerta.setMessage("Fallo en el login")
+                                alerta.setMessage(e.getMessage())
                                         .setNegativeButton( "Reintentar", null)
                                         .create()
                                         .show();
                             }
-
-                        } catch (JSONException e){
-                            e.getMessage();
-                            AlertDialog.Builder alerta =new AlertDialog.Builder( MainActivity.this);
-                            alerta.setMessage(e.getMessage())
-                                    .setNegativeButton( "Reintentar", null)
-                                    .create()
-                                    .show();
                         }
-                    }
 
 
 
-                };
+                    };
 
-                LoginRequest r = new LoginRequest(usuario,clave, respuesta);
-                RequestQueue cola = Volley.newRequestQueue( MainActivity.this);
-                cola.add(r);
+                    LoginRequest r = new LoginRequest(usuario,clave, respuesta);
+                    RequestQueue cola = Volley.newRequestQueue( MainActivity.this);
+                    cola.add(r);
+                }
+                else {
+                    Toast.makeText(MainActivity.this, "Datos vacios, intente nuevamente", Toast.LENGTH_SHORT).show();
+                }
 
             }
 
